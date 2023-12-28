@@ -11,8 +11,8 @@ resource "null_resource" "install" {
   provisioner "remote-exec" {
     connection {
       type     = "ssh"
-      user     = "root"
-      password = var.root_password
+      user     = data.aws_ssm_parameter.username.value
+      password = data.aws_ssm_parameter.password.value
       host     = aws_instance.ami.private_ip
     }
     inline = [
